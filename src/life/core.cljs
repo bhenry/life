@@ -1,11 +1,8 @@
 (ns life.core
   (:require [jayq.core :as j :refer [$]]
-            [yolk.bacon :as b]))
-
-(defn $table []
-  ($ "<dic></div>"))
+            [yolk.bacon :as b]
+            [life.templates :as t]))
 
 (defn ^:export main []
   (let [$content ($ "#content")]
-    (j/html $content
-            (j/append ($table) "HI"))))
+    (j/html $content (t/game 9 9))))
