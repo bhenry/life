@@ -1,6 +1,11 @@
-(ns life.core)
+(ns life.core
+  (:require [jayq.core :as j :refer [$]]
+            [yolk.bacon :as b]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (js/console.log x "Hello, World!"))
+(defn $table []
+  ($ "<dic></div>"))
+
+(defn ^:export main []
+  (let [$content ($ "#content")]
+    (j/html $content
+            (j/append ($table) "HI"))))

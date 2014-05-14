@@ -11,8 +11,6 @@
   :plugins [[lein-cljsbuild "0.3.0"]]
   :cljsbuild {:builds [{:id "dev"
                         :source-paths ["src"]
-                        :compiler {:output-to "resources/life.js"
-                                   :output-dir "out"
-                                   :optimizations :none
-                                   :pretty-print true
-                                   :source-map true}}]})
+                        :compiler {:output-to "resources/js/life.js"
+                                   :optimizations :whitespace
+                                   :pretty-print true}}]})
