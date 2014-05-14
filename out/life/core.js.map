@@ -1,0 +1,7 @@
+{"version":3,
+ "file":"/Users/bhenry/projects/personal/life/out/life/core.js",
+ "sources":["core.cljs"],
+ "lineCount":10,
+ "mappings":
+ ";AAAA;;AAEA;;;gBAAA,iBAAA,jCAAMA,8BAEHC,GACD,qBAAA,dAACC,YAAeD",
+ "names":["life.core/foo", "x", "js/console.log"]}
