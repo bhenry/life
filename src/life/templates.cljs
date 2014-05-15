@@ -8,6 +8,7 @@
   ($ "<tr></tr>"))
 
 (defn table-cell []
-  ($ (str "<td></td>")))
+  ($ "<td></td>"))
 
-
+(defn button [n]
+  ($ (str "<button class=\"" n "\">" n "</button>")))
