@@ -24,7 +24,7 @@
       (bj/modify w (remove-life p))
       (bj/modify w (add-life p)))))
 
-(defn cell [w p t]
+(defn cell [w p]
   (let [$c (t/table-cell)
         click (bj/clickE $c)
         changes (-> w
@@ -70,7 +70,7 @@
             :let [$r (t/table-row)]]
       (j/append $t $r)
       (doseq [x (range w)
-              :let [c (cell world [x y] tick)
+              :let [c (cell world [x y])
                     $c (:$elem c)]]
         (j/append $r $c)))
     (b/on-value tick #(bj/modify world iteration))
