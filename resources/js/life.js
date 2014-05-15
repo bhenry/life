@@ -27231,12 +27231,6 @@ goog.require("yolk.bacon");
 goog.require("life.game");
 goog.require("jayq.core");
 goog.require("jayq.core");
-life.core.timer = function timer(tick) {
-  return setTimeout(function() {
-    yolk.bacon.push.call(null, tick, new cljs.core.Keyword(null, "tick", "tick", 1017464079));
-    return timer.call(null, tick);
-  }, 1E3);
-};
 life.core.main = function main() {
   var $content = jayq.core.$.call(null, "#content");
   var game = life.game.game.call(null, 20, 20);
@@ -27245,13 +27239,3 @@ life.core.main = function main() {
   return yolk.bacon.plug.call(null, (new cljs.core.Keyword(null, "tick", "tick", 1017464079)).cljs$core$IFn$_invoke$arity$1(game), life.bj.clickE.call(null, jayq.core.$.call(null, ".step", $content)));
 };
 goog.exportSymbol("life.core.main", life.core.main);
-goog.provide("life.input");
-goog.require("cljs.core");
-goog.require("jayq.core");
-goog.require("yolk.bacon");
-goog.require("yolk.bacon");
-goog.require("jayq.core");
-goog.require("jayq.core");
-life.input.target = function target(e) {
-  return jayq.core.closest.call(null, jayq.core.$.call(null, e["target"]), "td");
-};
