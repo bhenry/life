@@ -24,7 +24,7 @@
       (bj/modify w (remove-life p))
       (bj/modify w (add-life p)))))
 
-(defn cell [vw w p t]
+(defn cell [w p t]
   (let [$c (t/table-cell)
         click (bj/clickE $c)
         changes (-> w
@@ -62,26 +62,15 @@
 (defn iteration [w]
   (set (concat (sustain w) (reproduce w))))
 
-(defn build [h w]
-  (into {}
-        (for [x (range w)
-              y (range h)
-              :let [p [x y]]]
-          [p (b/bus)])))
-
 (defn game [h w]
-  (let [visible-world (build h w)
-        world (bj/model #{})
+  (let [world (bj/model #{})
         $t (t/table)
         tick (b/bus)]
     (doseq [y (range h)
             :let [$r (t/table-row)]]
       (j/append $t $r)
       (doseq [x (range w)
-              :let [c (cell visible-world
-                            world
-                            [x y]
-                            tick)
+              :let [c (cell world [x y] tick)
                     $c (:$elem c)]]
         (j/append $r $c)))
     (b/on-value tick #(bj/modify world iteration))
