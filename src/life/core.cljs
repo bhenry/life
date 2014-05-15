@@ -2,8 +2,7 @@
   (:require [jayq.core :as j :refer [$]]
             [yolk.bacon :as b]
             [life.bj :as bj]
-            [life.g2 :as g]
-            [life.input :as i]
+            [life.game :as g]
             [life.templates :as t]))
 
 (defn timer [tick]

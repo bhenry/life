@@ -4,6 +4,12 @@
             [life.bj :as bj]
             [life.templates :as t]))
 
+(defn render [$c]
+  (fn [v]
+    (if v
+      (j/add-class $c "alive")
+      (j/remove-class $c "alive"))))
+
 (defn add-life [point]
   (fn [world]
     (set (cons point world))))
@@ -12,34 +18,21 @@
   (fn [world]
     (set (remove #{point} world))))
 
-(defn bind-click [world point state click-stream]
-  (bj/add-source state
-                 (-> click-stream
-                     (b/map #(not (bj/get-value state)))))
-  (-> state
-      b/changes
-      (b/on-value
-       #(if %
-          (bj/modify world (add-life point))
-          (bj/modify world (remove-life point))))))
+(defn toggle [p w]
+  (fn [_]
+    (if ((set (bj/get-value w)) p)
+      (bj/modify w (remove-life p))
+      (bj/modify w (add-life p)))))
 
-(defn bind-render [world point state $elem tick]
-  (-> state
-      b/changes
-      (b/on-value
-       #(if %
-          (j/add-class $elem "alive")
-          (j/remove-class $elem "alive"))))
-  (-> world
-      b/changes
-      (b/filter #((set %) point))))
-
-(defn cell [world point tick]
+(defn cell [vw w p t]
   (let [$c (t/table-cell)
-        state (bj/model nil)
-        click-stream (bj/clickE $c)]
-    (bind-click world point state click-stream)
-    (bind-render world point state $c tick)
+        click (bj/clickE $c)
+        changes (-> w
+                    b/changes
+                    (b/map #((set %) p))
+                    b/skip-duplicates)]
+    (b/on-value changes (render $c))
+    (b/on-value click (toggle p w))
     {:$elem $c}))
 
 (defn get-neighbors [p]
@@ -69,20 +62,29 @@
 (defn iteration [w]
   (set (concat (sustain w) (reproduce w))))
 
-(defn game [h w world]
-  (let [$t (t/table)
-        world (bj/model (set world))
+(defn build [h w]
+  (into {}
+        (for [x (range w)
+              y (range h)
+              :let [p [x y]]]
+          [p (b/bus)])))
+
+(defn game [h w]
+  (let [visible-world (build h w)
+        world (bj/model #{})
+        $t (t/table)
         tick (b/bus)]
     (doseq [y (range h)
             :let [$r (t/table-row)]]
       (j/append $t $r)
       (doseq [x (range w)
-              :let [c (cell world [x y] tick)
+              :let [c (cell visible-world
+                            world
+                            [x y]
+                            tick)
                     $c (:$elem c)]]
         (j/append $r $c)))
-    (-> tick
-        (b/on-value
-         (fn [_] (bj/modify world iteration))))
+    (b/on-value tick #(bj/modify world iteration))
     {:$elem $t
-     :world world
-     :tick tick}))
+     :tick tick
+     :world world}))
