@@ -65,7 +65,7 @@
 (defn game [h w]
   (let [world (bj/model #{})
         $t (t/table)
-        tick (b/bus)]
+        step (b/bus)]
     (doseq [y (range h)
             :let [$r (t/table-row)]]
       (j/append $t $r)
@@ -73,7 +73,7 @@
               :let [c (cell world [x y])
                     $c (:$elem c)]]
         (j/append $r $c)))
-    (b/on-value tick #(bj/modify world iteration))
+    (b/on-value step #(bj/modify world iteration))
     {:$elem $t
-     :tick tick
+     :step step
      :world world}))

@@ -5,9 +5,22 @@
             [life.game :as g]
             [life.templates :as t]))
 
+(defn ticker [tick]
+  (js/setTimeout (fn []
+                   (b/push tick :tick)
+                   (ticker tick)) 1000))
+
 (defn ^:export main []
   (let [$content ($ "#content")
-        game (g/game 20 20)]
-    (j/html $content (:$elem game))
-    (j/append $content (t/button "step"))
-    (b/plug (:tick game) (bj/clickE ($ ".step" $content)))))
+        game (g/game 20 20)
+        _ (j/html $content (:$elem game))
+        _ (j/append $content (t/button "step"))
+        _ (j/append $content (t/checkbox "auto"))
+        step (bj/clickE ($ ".step" $content))
+        auto (bj/check-box-value ($ ".auto" $content))
+        tick (b/bus)]
+    (ticker tick)
+    (b/plug (:step game)
+            (-> (b/combine-with tick auto list)
+                (b/filter second)))
+    (b/plug (:step game) step)))

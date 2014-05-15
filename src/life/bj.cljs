@@ -23,3 +23,5 @@
 
 (defn modify [model f]
   (.modify model f))
+
+(def check-box-value js/Bacon.$.checkBoxValue)
