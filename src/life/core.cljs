@@ -12,15 +12,19 @@
 
 (defn ^:export main []
   (let [$content ($ "#content")
-        game (g/game 20 20)
+        game (g/game 30 50)
         _ (j/html $content (:$elem game))
         _ (j/append $content (t/button "step"))
         _ (j/append $content (t/checkbox "auto"))
+        _ (j/append $content (t/button "clear"))
         step (bj/clickE ($ ".step" $content))
         auto (bj/check-box-value ($ ".auto" $content))
+        clear (bj/clickE ($ ".clear" $content))
         tick (b/bus)]
     (ticker tick)
     (b/plug (:step game)
             (-> (b/combine-with tick auto list)
                 (b/filter second)))
-    (b/plug (:step game) step)))
+    (b/plug (:step game) step)
+    (bj/add-source auto (b/map clear false))
+    (b/plug (:clear game) clear)))

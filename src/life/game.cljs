@@ -65,7 +65,8 @@
 (defn game [h w]
   (let [world (bj/model #{})
         $t (t/table)
-        step (b/bus)]
+        step (b/bus)
+        clear (b/bus)]
     (doseq [y (range h)
             :let [$r (t/table-row)]]
       (j/append $t $r)
@@ -74,6 +75,8 @@
                     $c (:$elem c)]]
         (j/append $r $c)))
     (b/on-value step #(bj/modify world iteration))
+    (b/on-value clear #(bj/modify world (constantly #{})))
     {:$elem $t
      :step step
+     :clear clear
      :world world}))
