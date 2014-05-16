@@ -82,8 +82,8 @@
       (do (bj/modify world iteration)
           (bj/modify history (write-history w))))))
 
-(defn game [h w & [world]]
-  (let [world (bj/model (or world #{}))
+(defn game [h w & [seed]]
+  (let [world (bj/model #{})
         history (bj/model [])
         $t (t/table)
         rewind (b/bus)
@@ -99,6 +99,7 @@
     (b/on-value rewind #(time-travel history world -1))
     (b/on-value step #(time-travel history world 1))
     (b/on-value clear #(bj/modify world (constantly #{})))
+    (when seed (bj/modify world (constantly seed)))
     {:$table $t
      :step step
      :clear clear

@@ -17,14 +17,16 @@
     (j/append $menu (t/button "rewind"))
     (j/append $menu (t/button "step"))
     (j/append $menu (t/checkbox "auto"))
-    (j/after $menu (t/hr))))
+    (j/after $menu (t/hr))
+    (j/append $content (t/div "game"))))
 
 (defn draw-game [$content game]
-  (j/append $content (:$table game)))
+  (j/html ($ ".game" $content) (:$table game)))
 
 (defn ^:export main []
   (let [$content ($ "#content")
-        game (g/game 30 50)
+        game (g/game 30 50
+                     #_ #{[20 20] [20 21] [21 20] [21 21]})
         _ (draw-page $content)
         _ (draw-game $content game)
         clear (bj/clickE ($ ".clear" $content))

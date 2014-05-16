@@ -1,8 +1,18 @@
 (ns life.templates
   (:require [jayq.core :as j :refer [$]]))
 
-(defn div []
-  ($ (str "<div>")))
+(defn option [opts & ks]
+  (if (string? opts)
+    opts
+    (first (remove nil? ((apply juxt ks) opts)))))
+
+(defn div [& [opts]]
+  (let [$d ($ (str "<div>"))
+        class (option opts :class :name)]
+    (when class
+      (j/add-class $d class))
+    
+    $d))
 
 (defn hr []
   ($ (str "<hr>")))

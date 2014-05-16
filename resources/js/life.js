@@ -26134,9 +26134,57 @@ goog.require("cljs.core");
 goog.require("jayq.core");
 goog.require("jayq.core");
 goog.require("jayq.core");
-life.templates.div = function div() {
-  return jayq.core.$.call(null, [cljs.core.str("\x3cdiv\x3e")].join(""));
-};
+life.templates.option = function() {
+  var option__delegate = function(opts, ks) {
+    if (typeof opts === "string") {
+      return opts;
+    } else {
+      return cljs.core.first.call(null, cljs.core.remove.call(null, cljs.core.nil_QMARK_, cljs.core.apply.call(null, cljs.core.juxt, ks).call(null, opts)));
+    }
+  };
+  var option = function(opts, var_args) {
+    var ks = null;
+    if (arguments.length > 1) {
+      ks = cljs.core.array_seq(Array.prototype.slice.call(arguments, 1), 0);
+    }
+    return option__delegate.call(this, opts, ks);
+  };
+  option.cljs$lang$maxFixedArity = 1;
+  option.cljs$lang$applyTo = function(arglist__99594) {
+    var opts = cljs.core.first(arglist__99594);
+    var ks = cljs.core.rest(arglist__99594);
+    return option__delegate(opts, ks);
+  };
+  option.cljs$core$IFn$_invoke$arity$variadic = option__delegate;
+  return option;
+}();
+life.templates.div = function() {
+  var div__delegate = function(p__99595) {
+    var vec__99597 = p__99595;
+    var opts = cljs.core.nth.call(null, vec__99597, 0, null);
+    var $d = jayq.core.$.call(null, [cljs.core.str("\x3cdiv\x3e")].join(""));
+    var class$ = life.templates.option.call(null, opts, new cljs.core.Keyword(null, "class", "class", 1108647146), new cljs.core.Keyword(null, "name", "name", 1017277949));
+    if (cljs.core.truth_(class$)) {
+      jayq.core.add_class.call(null, $d, class$);
+    } else {
+    }
+    return $d;
+  };
+  var div = function(var_args) {
+    var p__99595 = null;
+    if (arguments.length > 0) {
+      p__99595 = cljs.core.array_seq(Array.prototype.slice.call(arguments, 0), 0);
+    }
+    return div__delegate.call(this, p__99595);
+  };
+  div.cljs$lang$maxFixedArity = 0;
+  div.cljs$lang$applyTo = function(arglist__99598) {
+    var p__99595 = cljs.core.seq(arglist__99598);
+    return div__delegate(p__99595);
+  };
+  div.cljs$core$IFn$_invoke$arity$variadic = div__delegate;
+  return div;
+}();
 life.templates.hr = function hr() {
   return jayq.core.$.call(null, [cljs.core.str("\x3chr\x3e")].join(""));
 };
@@ -26842,8 +26890,8 @@ life.game.cell = function cell(w, p) {
   var $c = life.templates.table_cell.call(null);
   var click = life.bj.clickE.call(null, $c);
   var changes = yolk.bacon.skip_duplicates.call(null, yolk.bacon.map.call(null, yolk.bacon.changes.call(null, w), function($c, click) {
-    return function(p1__98079_SHARP_) {
-      return cljs.core.set.call(null, p1__98079_SHARP_).call(null, p);
+    return function(p1__102635_SHARP_) {
+      return cljs.core.set.call(null, p1__102635_SHARP_).call(null, p);
     };
   }($c, click)));
   yolk.bacon.on_value.call(null, changes, life.game.render.call(null, $c));
@@ -26852,47 +26900,47 @@ life.game.cell = function cell(w, p) {
 };
 life.game.get_neighbors = function get_neighbors(p) {
   return cljs.core.apply.call(null, cljs.core.juxt, function() {
-    var iter__4340__auto__ = function iter__98102(s__98103) {
+    var iter__4340__auto__ = function iter__102658(s__102659) {
       return new cljs.core.LazySeq(null, function() {
-        var s__98103__$1 = s__98103;
+        var s__102659__$1 = s__102659;
         while (true) {
-          var temp__4092__auto__ = cljs.core.seq.call(null, s__98103__$1);
+          var temp__4092__auto__ = cljs.core.seq.call(null, s__102659__$1);
           if (temp__4092__auto__) {
             var xs__4579__auto__ = temp__4092__auto__;
             var a = cljs.core.first.call(null, xs__4579__auto__);
-            var iterys__4336__auto__ = function(s__98103__$1, a, xs__4579__auto__, temp__4092__auto__) {
-              return function iter__98104(s__98105) {
-                return new cljs.core.LazySeq(null, function(s__98103__$1, a, xs__4579__auto__, temp__4092__auto__) {
+            var iterys__4336__auto__ = function(s__102659__$1, a, xs__4579__auto__, temp__4092__auto__) {
+              return function iter__102660(s__102661) {
+                return new cljs.core.LazySeq(null, function(s__102659__$1, a, xs__4579__auto__, temp__4092__auto__) {
                   return function() {
-                    var s__98105__$1 = s__98105;
+                    var s__102661__$1 = s__102661;
                     while (true) {
-                      var temp__4092__auto____$1 = cljs.core.seq.call(null, s__98105__$1);
+                      var temp__4092__auto____$1 = cljs.core.seq.call(null, s__102661__$1);
                       if (temp__4092__auto____$1) {
-                        var s__98105__$2 = temp__4092__auto____$1;
-                        if (cljs.core.chunked_seq_QMARK_.call(null, s__98105__$2)) {
-                          var c__4338__auto__ = cljs.core.chunk_first.call(null, s__98105__$2);
+                        var s__102661__$2 = temp__4092__auto____$1;
+                        if (cljs.core.chunked_seq_QMARK_.call(null, s__102661__$2)) {
+                          var c__4338__auto__ = cljs.core.chunk_first.call(null, s__102661__$2);
                           var size__4339__auto__ = cljs.core.count.call(null, c__4338__auto__);
-                          var b__98107 = cljs.core.chunk_buffer.call(null, size__4339__auto__);
+                          var b__102663 = cljs.core.chunk_buffer.call(null, size__4339__auto__);
                           if (function() {
-                            var i__98106 = 0;
+                            var i__102662 = 0;
                             while (true) {
-                              if (i__98106 < size__4339__auto__) {
-                                var b = cljs.core._nth.call(null, c__4338__auto__, i__98106);
+                              if (i__102662 < size__4339__auto__) {
+                                var b = cljs.core._nth.call(null, c__4338__auto__, i__102662);
                                 if (cljs.core.not_EQ_.call(null, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [0, 0], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [a, b], null))) {
-                                  cljs.core.chunk_append.call(null, b__98107, function(i__98106, s__98105__$1, s__98103__$1, b, c__4338__auto__, size__4339__auto__, b__98107, s__98105__$2, temp__4092__auto____$1, a, xs__4579__auto__, temp__4092__auto__) {
-                                    return function(p__98120) {
-                                      var vec__98121 = p__98120;
-                                      var x = cljs.core.nth.call(null, vec__98121, 0, null);
-                                      var y = cljs.core.nth.call(null, vec__98121, 1, null);
+                                  cljs.core.chunk_append.call(null, b__102663, function(i__102662, s__102661__$1, s__102659__$1, b, c__4338__auto__, size__4339__auto__, b__102663, s__102661__$2, temp__4092__auto____$1, a, xs__4579__auto__, temp__4092__auto__) {
+                                    return function(p__102676) {
+                                      var vec__102677 = p__102676;
+                                      var x = cljs.core.nth.call(null, vec__102677, 0, null);
+                                      var y = cljs.core.nth.call(null, vec__102677, 1, null);
                                       return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x + a, y + b], null);
                                     };
-                                  }(i__98106, s__98105__$1, s__98103__$1, b, c__4338__auto__, size__4339__auto__, b__98107, s__98105__$2, temp__4092__auto____$1, a, xs__4579__auto__, temp__4092__auto__));
-                                  var G__98124 = i__98106 + 1;
-                                  i__98106 = G__98124;
+                                  }(i__102662, s__102661__$1, s__102659__$1, b, c__4338__auto__, size__4339__auto__, b__102663, s__102661__$2, temp__4092__auto____$1, a, xs__4579__auto__, temp__4092__auto__));
+                                  var G__102680 = i__102662 + 1;
+                                  i__102662 = G__102680;
                                   continue;
                                 } else {
-                                  var G__98125 = i__98106 + 1;
-                                  i__98106 = G__98125;
+                                  var G__102681 = i__102662 + 1;
+                                  i__102662 = G__102681;
                                   continue;
                                 }
                               } else {
@@ -26901,24 +26949,24 @@ life.game.get_neighbors = function get_neighbors(p) {
                               break;
                             }
                           }()) {
-                            return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__98107), iter__98104.call(null, cljs.core.chunk_rest.call(null, s__98105__$2)));
+                            return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__102663), iter__102660.call(null, cljs.core.chunk_rest.call(null, s__102661__$2)));
                           } else {
-                            return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__98107), null);
+                            return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__102663), null);
                           }
                         } else {
-                          var b = cljs.core.first.call(null, s__98105__$2);
+                          var b = cljs.core.first.call(null, s__102661__$2);
                           if (cljs.core.not_EQ_.call(null, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [0, 0], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [a, b], null))) {
-                            return cljs.core.cons.call(null, function(s__98105__$1, s__98103__$1, b, s__98105__$2, temp__4092__auto____$1, a, xs__4579__auto__, temp__4092__auto__) {
-                              return function(p__98122) {
-                                var vec__98123 = p__98122;
-                                var x = cljs.core.nth.call(null, vec__98123, 0, null);
-                                var y = cljs.core.nth.call(null, vec__98123, 1, null);
+                            return cljs.core.cons.call(null, function(s__102661__$1, s__102659__$1, b, s__102661__$2, temp__4092__auto____$1, a, xs__4579__auto__, temp__4092__auto__) {
+                              return function(p__102678) {
+                                var vec__102679 = p__102678;
+                                var x = cljs.core.nth.call(null, vec__102679, 0, null);
+                                var y = cljs.core.nth.call(null, vec__102679, 1, null);
                                 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x + a, y + b], null);
                               };
-                            }(s__98105__$1, s__98103__$1, b, s__98105__$2, temp__4092__auto____$1, a, xs__4579__auto__, temp__4092__auto__), iter__98104.call(null, cljs.core.rest.call(null, s__98105__$2)));
+                            }(s__102661__$1, s__102659__$1, b, s__102661__$2, temp__4092__auto____$1, a, xs__4579__auto__, temp__4092__auto__), iter__102660.call(null, cljs.core.rest.call(null, s__102661__$2)));
                           } else {
-                            var G__98126 = cljs.core.rest.call(null, s__98105__$2);
-                            s__98105__$1 = G__98126;
+                            var G__102682 = cljs.core.rest.call(null, s__102661__$2);
+                            s__102661__$1 = G__102682;
                             continue;
                           }
                         }
@@ -26928,15 +26976,15 @@ life.game.get_neighbors = function get_neighbors(p) {
                       break;
                     }
                   };
-                }(s__98103__$1, a, xs__4579__auto__, temp__4092__auto__), null, null);
+                }(s__102659__$1, a, xs__4579__auto__, temp__4092__auto__), null, null);
               };
-            }(s__98103__$1, a, xs__4579__auto__, temp__4092__auto__);
+            }(s__102659__$1, a, xs__4579__auto__, temp__4092__auto__);
             var fs__4337__auto__ = cljs.core.seq.call(null, iterys__4336__auto__.call(null, new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [-1, 0, 1], null)));
             if (fs__4337__auto__) {
-              return cljs.core.concat.call(null, fs__4337__auto__, iter__98102.call(null, cljs.core.rest.call(null, s__98103__$1)));
+              return cljs.core.concat.call(null, fs__4337__auto__, iter__102658.call(null, cljs.core.rest.call(null, s__102659__$1)));
             } else {
-              var G__98127 = cljs.core.rest.call(null, s__98103__$1);
-              s__98103__$1 = G__98127;
+              var G__102683 = cljs.core.rest.call(null, s__102659__$1);
+              s__102659__$1 = G__102683;
               continue;
             }
           } else {
@@ -26951,42 +26999,42 @@ life.game.get_neighbors = function get_neighbors(p) {
 };
 life.game.sustain = function sustain(w) {
   return cljs.core.remove.call(null, cljs.core.nil_QMARK_, function() {
-    var iter__4340__auto__ = function iter__98144(s__98145) {
+    var iter__4340__auto__ = function iter__102700(s__102701) {
       return new cljs.core.LazySeq(null, function() {
-        var s__98145__$1 = s__98145;
+        var s__102701__$1 = s__102701;
         while (true) {
-          var temp__4092__auto__ = cljs.core.seq.call(null, s__98145__$1);
+          var temp__4092__auto__ = cljs.core.seq.call(null, s__102701__$1);
           if (temp__4092__auto__) {
-            var s__98145__$2 = temp__4092__auto__;
-            if (cljs.core.chunked_seq_QMARK_.call(null, s__98145__$2)) {
-              var c__4338__auto__ = cljs.core.chunk_first.call(null, s__98145__$2);
+            var s__102701__$2 = temp__4092__auto__;
+            if (cljs.core.chunked_seq_QMARK_.call(null, s__102701__$2)) {
+              var c__4338__auto__ = cljs.core.chunk_first.call(null, s__102701__$2);
               var size__4339__auto__ = cljs.core.count.call(null, c__4338__auto__);
-              var b__98147 = cljs.core.chunk_buffer.call(null, size__4339__auto__);
+              var b__102703 = cljs.core.chunk_buffer.call(null, size__4339__auto__);
               if (function() {
-                var i__98146 = 0;
+                var i__102702 = 0;
                 while (true) {
-                  if (i__98146 < size__4339__auto__) {
-                    var p = cljs.core._nth.call(null, c__4338__auto__, i__98146);
+                  if (i__102702 < size__4339__auto__) {
+                    var p = cljs.core._nth.call(null, c__4338__auto__, i__102702);
                     var neighbors = cljs.core.filter.call(null, cljs.core.set.call(null, w), life.game.get_neighbors.call(null, p));
-                    cljs.core.chunk_append.call(null, b__98147, function() {
-                      var pred__98154 = cljs.core._GT_;
-                      var expr__98155 = cljs.core.count.call(null, neighbors);
-                      if (cljs.core.truth_(pred__98154.call(null, 2, expr__98155))) {
+                    cljs.core.chunk_append.call(null, b__102703, function() {
+                      var pred__102710 = cljs.core._GT_;
+                      var expr__102711 = cljs.core.count.call(null, neighbors);
+                      if (cljs.core.truth_(pred__102710.call(null, 2, expr__102711))) {
                         return null;
                       } else {
-                        if (cljs.core.truth_(pred__98154.call(null, 4, expr__98155))) {
+                        if (cljs.core.truth_(pred__102710.call(null, 4, expr__102711))) {
                           return p;
                         } else {
-                          if (cljs.core.truth_(pred__98154.call(null, 9, expr__98155))) {
+                          if (cljs.core.truth_(pred__102710.call(null, 9, expr__102711))) {
                             return null;
                           } else {
-                            throw new Error([cljs.core.str("No matching clause: "), cljs.core.str(expr__98155)].join(""));
+                            throw new Error([cljs.core.str("No matching clause: "), cljs.core.str(expr__102711)].join(""));
                           }
                         }
                       }
                     }());
-                    var G__98160 = i__98146 + 1;
-                    i__98146 = G__98160;
+                    var G__102716 = i__102702 + 1;
+                    i__102702 = G__102716;
                     continue;
                   } else {
                     return true;
@@ -26994,30 +27042,30 @@ life.game.sustain = function sustain(w) {
                   break;
                 }
               }()) {
-                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__98147), iter__98144.call(null, cljs.core.chunk_rest.call(null, s__98145__$2)));
+                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__102703), iter__102700.call(null, cljs.core.chunk_rest.call(null, s__102701__$2)));
               } else {
-                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__98147), null);
+                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__102703), null);
               }
             } else {
-              var p = cljs.core.first.call(null, s__98145__$2);
+              var p = cljs.core.first.call(null, s__102701__$2);
               var neighbors = cljs.core.filter.call(null, cljs.core.set.call(null, w), life.game.get_neighbors.call(null, p));
               return cljs.core.cons.call(null, function() {
-                var pred__98157 = cljs.core._GT_;
-                var expr__98158 = cljs.core.count.call(null, neighbors);
-                if (cljs.core.truth_(pred__98157.call(null, 2, expr__98158))) {
+                var pred__102713 = cljs.core._GT_;
+                var expr__102714 = cljs.core.count.call(null, neighbors);
+                if (cljs.core.truth_(pred__102713.call(null, 2, expr__102714))) {
                   return null;
                 } else {
-                  if (cljs.core.truth_(pred__98157.call(null, 4, expr__98158))) {
+                  if (cljs.core.truth_(pred__102713.call(null, 4, expr__102714))) {
                     return p;
                   } else {
-                    if (cljs.core.truth_(pred__98157.call(null, 9, expr__98158))) {
+                    if (cljs.core.truth_(pred__102713.call(null, 9, expr__102714))) {
                       return null;
                     } else {
-                      throw new Error([cljs.core.str("No matching clause: "), cljs.core.str(expr__98158)].join(""));
+                      throw new Error([cljs.core.str("No matching clause: "), cljs.core.str(expr__102714)].join(""));
                     }
                   }
                 }
-              }(), iter__98144.call(null, cljs.core.rest.call(null, s__98145__$2)));
+              }(), iter__102700.call(null, cljs.core.rest.call(null, s__102701__$2)));
             }
           } else {
             return null;
@@ -27031,26 +27079,26 @@ life.game.sustain = function sustain(w) {
 };
 life.game.reproduce = function reproduce(w) {
   return cljs.core.remove.call(null, cljs.core.nil_QMARK_, function() {
-    var iter__4340__auto__ = function iter__98165(s__98166) {
+    var iter__4340__auto__ = function iter__102721(s__102722) {
       return new cljs.core.LazySeq(null, function() {
-        var s__98166__$1 = s__98166;
+        var s__102722__$1 = s__102722;
         while (true) {
-          var temp__4092__auto__ = cljs.core.seq.call(null, s__98166__$1);
+          var temp__4092__auto__ = cljs.core.seq.call(null, s__102722__$1);
           if (temp__4092__auto__) {
-            var s__98166__$2 = temp__4092__auto__;
-            if (cljs.core.chunked_seq_QMARK_.call(null, s__98166__$2)) {
-              var c__4338__auto__ = cljs.core.chunk_first.call(null, s__98166__$2);
+            var s__102722__$2 = temp__4092__auto__;
+            if (cljs.core.chunked_seq_QMARK_.call(null, s__102722__$2)) {
+              var c__4338__auto__ = cljs.core.chunk_first.call(null, s__102722__$2);
               var size__4339__auto__ = cljs.core.count.call(null, c__4338__auto__);
-              var b__98168 = cljs.core.chunk_buffer.call(null, size__4339__auto__);
+              var b__102724 = cljs.core.chunk_buffer.call(null, size__4339__auto__);
               if (function() {
-                var i__98167 = 0;
+                var i__102723 = 0;
                 while (true) {
-                  if (i__98167 < size__4339__auto__) {
-                    var p = cljs.core._nth.call(null, c__4338__auto__, i__98167);
+                  if (i__102723 < size__4339__auto__) {
+                    var p = cljs.core._nth.call(null, c__4338__auto__, i__102723);
                     var nneighbors = cljs.core.filter.call(null, cljs.core.set.call(null, w), life.game.get_neighbors.call(null, p));
-                    cljs.core.chunk_append.call(null, b__98168, cljs.core._EQ_.call(null, 3, cljs.core.count.call(null, nneighbors)) ? p : null);
-                    var G__98169 = i__98167 + 1;
-                    i__98167 = G__98169;
+                    cljs.core.chunk_append.call(null, b__102724, cljs.core._EQ_.call(null, 3, cljs.core.count.call(null, nneighbors)) ? p : null);
+                    var G__102725 = i__102723 + 1;
+                    i__102723 = G__102725;
                     continue;
                   } else {
                     return true;
@@ -27058,14 +27106,14 @@ life.game.reproduce = function reproduce(w) {
                   break;
                 }
               }()) {
-                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__98168), iter__98165.call(null, cljs.core.chunk_rest.call(null, s__98166__$2)));
+                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__102724), iter__102721.call(null, cljs.core.chunk_rest.call(null, s__102722__$2)));
               } else {
-                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__98168), null);
+                return cljs.core.chunk_cons.call(null, cljs.core.chunk.call(null, b__102724), null);
               }
             } else {
-              var p = cljs.core.first.call(null, s__98166__$2);
+              var p = cljs.core.first.call(null, s__102722__$2);
               var nneighbors = cljs.core.filter.call(null, cljs.core.set.call(null, w), life.game.get_neighbors.call(null, p));
-              return cljs.core.cons.call(null, cljs.core._EQ_.call(null, 3, cljs.core.count.call(null, nneighbors)) ? p : null, iter__98165.call(null, cljs.core.rest.call(null, s__98166__$2)));
+              return cljs.core.cons.call(null, cljs.core._EQ_.call(null, 3, cljs.core.count.call(null, nneighbors)) ? p : null, iter__102721.call(null, cljs.core.rest.call(null, s__102722__$2)));
             }
           } else {
             return null;
@@ -27122,78 +27170,71 @@ life.game.time_travel = function time_travel(history, world, dir) {
   }
 };
 life.game.game = function() {
-  var game__delegate = function(h, w, p__98170) {
-    var vec__98190 = p__98170;
-    var world = cljs.core.nth.call(null, vec__98190, 0, null);
-    var world__$1 = life.bj.model.call(null, function() {
-      var or__3623__auto__ = world;
-      if (cljs.core.truth_(or__3623__auto__)) {
-        return or__3623__auto__;
-      } else {
-        return cljs.core.PersistentHashSet.EMPTY;
-      }
-    }());
+  var game__delegate = function(h, w, p__102726) {
+    var vec__102746 = p__102726;
+    var seed = cljs.core.nth.call(null, vec__102746, 0, null);
+    var world = life.bj.model.call(null, cljs.core.PersistentHashSet.EMPTY);
     var history = life.bj.model.call(null, cljs.core.PersistentVector.EMPTY);
     var $t = life.templates.table.call(null);
     var rewind = yolk.bacon.bus.call(null);
     var step = yolk.bacon.bus.call(null);
     var clear = yolk.bacon.bus.call(null);
-    var seq__98191_98209 = cljs.core.seq.call(null, cljs.core.range.call(null, h));
-    var chunk__98193_98210 = null;
-    var count__98194_98211 = 0;
-    var i__98195_98212 = 0;
+    var seq__102747_102765 = cljs.core.seq.call(null, cljs.core.range.call(null, h));
+    var chunk__102749_102766 = null;
+    var count__102750_102767 = 0;
+    var i__102751_102768 = 0;
     while (true) {
-      if (i__98195_98212 < count__98194_98211) {
-        var y_98213 = cljs.core._nth.call(null, chunk__98193_98210, i__98195_98212);
-        var $r_98214 = life.templates.table_row.call(null);
-        jayq.core.append.call(null, $t, $r_98214);
-        var seq__98197_98215 = cljs.core.seq.call(null, cljs.core.range.call(null, w));
-        var chunk__98199_98216 = null;
-        var count__98200_98217 = 0;
-        var i__98201_98218 = 0;
+      if (i__102751_102768 < count__102750_102767) {
+        var y_102769 = cljs.core._nth.call(null, chunk__102749_102766, i__102751_102768);
+        var $r_102770 = life.templates.table_row.call(null);
+        jayq.core.append.call(null, $t, $r_102770);
+        var seq__102753_102771 = cljs.core.seq.call(null, cljs.core.range.call(null, w));
+        var chunk__102755_102772 = null;
+        var count__102756_102773 = 0;
+        var i__102757_102774 = 0;
         while (true) {
-          if (i__98201_98218 < count__98200_98217) {
-            var x_98219 = cljs.core._nth.call(null, chunk__98199_98216, i__98201_98218);
-            var c_98220 = life.game.cell.call(null, world__$1, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x_98219, y_98213], null));
-            var $c_98221 = (new cljs.core.Keyword(null, "$cell", "$cell", 1050200824)).cljs$core$IFn$_invoke$arity$1(c_98220);
-            jayq.core.append.call(null, $r_98214, $c_98221);
-            var G__98222 = seq__98197_98215;
-            var G__98223 = chunk__98199_98216;
-            var G__98224 = count__98200_98217;
-            var G__98225 = i__98201_98218 + 1;
-            seq__98197_98215 = G__98222;
-            chunk__98199_98216 = G__98223;
-            count__98200_98217 = G__98224;
-            i__98201_98218 = G__98225;
+          if (i__102757_102774 < count__102756_102773) {
+            var x_102775 = cljs.core._nth.call(null, chunk__102755_102772, i__102757_102774);
+            var c_102776 = life.game.cell.call(null, world, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x_102775, y_102769], null));
+            var $c_102777 = (new cljs.core.Keyword(null, "$cell", "$cell", 1050200824)).cljs$core$IFn$_invoke$arity$1(c_102776);
+            jayq.core.append.call(null, $r_102770, $c_102777);
+            var G__102778 = seq__102753_102771;
+            var G__102779 = chunk__102755_102772;
+            var G__102780 = count__102756_102773;
+            var G__102781 = i__102757_102774 + 1;
+            seq__102753_102771 = G__102778;
+            chunk__102755_102772 = G__102779;
+            count__102756_102773 = G__102780;
+            i__102757_102774 = G__102781;
             continue;
           } else {
-            var temp__4092__auto___98226 = cljs.core.seq.call(null, seq__98197_98215);
-            if (temp__4092__auto___98226) {
-              var seq__98197_98227__$1 = temp__4092__auto___98226;
-              if (cljs.core.chunked_seq_QMARK_.call(null, seq__98197_98227__$1)) {
-                var c__4371__auto___98228 = cljs.core.chunk_first.call(null, seq__98197_98227__$1);
-                var G__98229 = cljs.core.chunk_rest.call(null, seq__98197_98227__$1);
-                var G__98230 = c__4371__auto___98228;
-                var G__98231 = cljs.core.count.call(null, c__4371__auto___98228);
-                var G__98232 = 0;
-                seq__98197_98215 = G__98229;
-                chunk__98199_98216 = G__98230;
-                count__98200_98217 = G__98231;
-                i__98201_98218 = G__98232;
+            var temp__4092__auto___102782 = cljs.core.seq.call(null, seq__102753_102771);
+            if (temp__4092__auto___102782) {
+              var seq__102753_102783__$1 = temp__4092__auto___102782;
+              if (cljs.core.chunked_seq_QMARK_.call(null, seq__102753_102783__$1)) {
+                var c__4371__auto___102784 = cljs.core.chunk_first.call(null, seq__102753_102783__$1);
+                var G__102785 = cljs.core.chunk_rest.call(null, seq__102753_102783__$1);
+                var G__102786 = c__4371__auto___102784;
+                var G__102787 = cljs.core.count.call(null, c__4371__auto___102784);
+                var G__102788 = 0;
+                seq__102753_102771 = G__102785;
+                chunk__102755_102772 = G__102786;
+                count__102756_102773 = G__102787;
+                i__102757_102774 = G__102788;
                 continue;
               } else {
-                var x_98233 = cljs.core.first.call(null, seq__98197_98227__$1);
-                var c_98234 = life.game.cell.call(null, world__$1, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x_98233, y_98213], null));
-                var $c_98235 = (new cljs.core.Keyword(null, "$cell", "$cell", 1050200824)).cljs$core$IFn$_invoke$arity$1(c_98234);
-                jayq.core.append.call(null, $r_98214, $c_98235);
-                var G__98236 = cljs.core.next.call(null, seq__98197_98227__$1);
-                var G__98237 = null;
-                var G__98238 = 0;
-                var G__98239 = 0;
-                seq__98197_98215 = G__98236;
-                chunk__98199_98216 = G__98237;
-                count__98200_98217 = G__98238;
-                i__98201_98218 = G__98239;
+                var x_102789 = cljs.core.first.call(null, seq__102753_102783__$1);
+                var c_102790 = life.game.cell.call(null, world, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x_102789, y_102769], null));
+                var $c_102791 = (new cljs.core.Keyword(null, "$cell", "$cell", 1050200824)).cljs$core$IFn$_invoke$arity$1(c_102790);
+                jayq.core.append.call(null, $r_102770, $c_102791);
+                var G__102792 = cljs.core.next.call(null, seq__102753_102783__$1);
+                var G__102793 = null;
+                var G__102794 = 0;
+                var G__102795 = 0;
+                seq__102753_102771 = G__102792;
+                chunk__102755_102772 = G__102793;
+                count__102756_102773 = G__102794;
+                i__102757_102774 = G__102795;
                 continue;
               }
             } else {
@@ -27201,81 +27242,81 @@ life.game.game = function() {
           }
           break;
         }
-        var G__98240 = seq__98191_98209;
-        var G__98241 = chunk__98193_98210;
-        var G__98242 = count__98194_98211;
-        var G__98243 = i__98195_98212 + 1;
-        seq__98191_98209 = G__98240;
-        chunk__98193_98210 = G__98241;
-        count__98194_98211 = G__98242;
-        i__98195_98212 = G__98243;
+        var G__102796 = seq__102747_102765;
+        var G__102797 = chunk__102749_102766;
+        var G__102798 = count__102750_102767;
+        var G__102799 = i__102751_102768 + 1;
+        seq__102747_102765 = G__102796;
+        chunk__102749_102766 = G__102797;
+        count__102750_102767 = G__102798;
+        i__102751_102768 = G__102799;
         continue;
       } else {
-        var temp__4092__auto___98244 = cljs.core.seq.call(null, seq__98191_98209);
-        if (temp__4092__auto___98244) {
-          var seq__98191_98245__$1 = temp__4092__auto___98244;
-          if (cljs.core.chunked_seq_QMARK_.call(null, seq__98191_98245__$1)) {
-            var c__4371__auto___98246 = cljs.core.chunk_first.call(null, seq__98191_98245__$1);
-            var G__98247 = cljs.core.chunk_rest.call(null, seq__98191_98245__$1);
-            var G__98248 = c__4371__auto___98246;
-            var G__98249 = cljs.core.count.call(null, c__4371__auto___98246);
-            var G__98250 = 0;
-            seq__98191_98209 = G__98247;
-            chunk__98193_98210 = G__98248;
-            count__98194_98211 = G__98249;
-            i__98195_98212 = G__98250;
+        var temp__4092__auto___102800 = cljs.core.seq.call(null, seq__102747_102765);
+        if (temp__4092__auto___102800) {
+          var seq__102747_102801__$1 = temp__4092__auto___102800;
+          if (cljs.core.chunked_seq_QMARK_.call(null, seq__102747_102801__$1)) {
+            var c__4371__auto___102802 = cljs.core.chunk_first.call(null, seq__102747_102801__$1);
+            var G__102803 = cljs.core.chunk_rest.call(null, seq__102747_102801__$1);
+            var G__102804 = c__4371__auto___102802;
+            var G__102805 = cljs.core.count.call(null, c__4371__auto___102802);
+            var G__102806 = 0;
+            seq__102747_102765 = G__102803;
+            chunk__102749_102766 = G__102804;
+            count__102750_102767 = G__102805;
+            i__102751_102768 = G__102806;
             continue;
           } else {
-            var y_98251 = cljs.core.first.call(null, seq__98191_98245__$1);
-            var $r_98252 = life.templates.table_row.call(null);
-            jayq.core.append.call(null, $t, $r_98252);
-            var seq__98203_98253 = cljs.core.seq.call(null, cljs.core.range.call(null, w));
-            var chunk__98205_98254 = null;
-            var count__98206_98255 = 0;
-            var i__98207_98256 = 0;
+            var y_102807 = cljs.core.first.call(null, seq__102747_102801__$1);
+            var $r_102808 = life.templates.table_row.call(null);
+            jayq.core.append.call(null, $t, $r_102808);
+            var seq__102759_102809 = cljs.core.seq.call(null, cljs.core.range.call(null, w));
+            var chunk__102761_102810 = null;
+            var count__102762_102811 = 0;
+            var i__102763_102812 = 0;
             while (true) {
-              if (i__98207_98256 < count__98206_98255) {
-                var x_98257 = cljs.core._nth.call(null, chunk__98205_98254, i__98207_98256);
-                var c_98258 = life.game.cell.call(null, world__$1, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x_98257, y_98251], null));
-                var $c_98259 = (new cljs.core.Keyword(null, "$cell", "$cell", 1050200824)).cljs$core$IFn$_invoke$arity$1(c_98258);
-                jayq.core.append.call(null, $r_98252, $c_98259);
-                var G__98260 = seq__98203_98253;
-                var G__98261 = chunk__98205_98254;
-                var G__98262 = count__98206_98255;
-                var G__98263 = i__98207_98256 + 1;
-                seq__98203_98253 = G__98260;
-                chunk__98205_98254 = G__98261;
-                count__98206_98255 = G__98262;
-                i__98207_98256 = G__98263;
+              if (i__102763_102812 < count__102762_102811) {
+                var x_102813 = cljs.core._nth.call(null, chunk__102761_102810, i__102763_102812);
+                var c_102814 = life.game.cell.call(null, world, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x_102813, y_102807], null));
+                var $c_102815 = (new cljs.core.Keyword(null, "$cell", "$cell", 1050200824)).cljs$core$IFn$_invoke$arity$1(c_102814);
+                jayq.core.append.call(null, $r_102808, $c_102815);
+                var G__102816 = seq__102759_102809;
+                var G__102817 = chunk__102761_102810;
+                var G__102818 = count__102762_102811;
+                var G__102819 = i__102763_102812 + 1;
+                seq__102759_102809 = G__102816;
+                chunk__102761_102810 = G__102817;
+                count__102762_102811 = G__102818;
+                i__102763_102812 = G__102819;
                 continue;
               } else {
-                var temp__4092__auto___98264__$1 = cljs.core.seq.call(null, seq__98203_98253);
-                if (temp__4092__auto___98264__$1) {
-                  var seq__98203_98265__$1 = temp__4092__auto___98264__$1;
-                  if (cljs.core.chunked_seq_QMARK_.call(null, seq__98203_98265__$1)) {
-                    var c__4371__auto___98266 = cljs.core.chunk_first.call(null, seq__98203_98265__$1);
-                    var G__98267 = cljs.core.chunk_rest.call(null, seq__98203_98265__$1);
-                    var G__98268 = c__4371__auto___98266;
-                    var G__98269 = cljs.core.count.call(null, c__4371__auto___98266);
-                    var G__98270 = 0;
-                    seq__98203_98253 = G__98267;
-                    chunk__98205_98254 = G__98268;
-                    count__98206_98255 = G__98269;
-                    i__98207_98256 = G__98270;
+                var temp__4092__auto___102820__$1 = cljs.core.seq.call(null, seq__102759_102809);
+                if (temp__4092__auto___102820__$1) {
+                  var seq__102759_102821__$1 = temp__4092__auto___102820__$1;
+                  if (cljs.core.chunked_seq_QMARK_.call(null, seq__102759_102821__$1)) {
+                    var c__4371__auto___102822 = cljs.core.chunk_first.call(null, seq__102759_102821__$1);
+                    var G__102823 = cljs.core.chunk_rest.call(null, seq__102759_102821__$1);
+                    var G__102824 = c__4371__auto___102822;
+                    var G__102825 = cljs.core.count.call(null, c__4371__auto___102822);
+                    var G__102826 = 0;
+                    seq__102759_102809 = G__102823;
+                    chunk__102761_102810 = G__102824;
+                    count__102762_102811 = G__102825;
+                    i__102763_102812 = G__102826;
                     continue;
                   } else {
-                    var x_98271 = cljs.core.first.call(null, seq__98203_98265__$1);
-                    var c_98272 = life.game.cell.call(null, world__$1, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x_98271, y_98251], null));
-                    var $c_98273 = (new cljs.core.Keyword(null, "$cell", "$cell", 1050200824)).cljs$core$IFn$_invoke$arity$1(c_98272);
-                    jayq.core.append.call(null, $r_98252, $c_98273);
-                    var G__98274 = cljs.core.next.call(null, seq__98203_98265__$1);
-                    var G__98275 = null;
-                    var G__98276 = 0;
-                    var G__98277 = 0;
-                    seq__98203_98253 = G__98274;
-                    chunk__98205_98254 = G__98275;
-                    count__98206_98255 = G__98276;
-                    i__98207_98256 = G__98277;
+                    var x_102827 = cljs.core.first.call(null, seq__102759_102821__$1);
+                    var c_102828 = life.game.cell.call(null, world, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x_102827, y_102807], null));
+                    var $c_102829 = (new cljs.core.Keyword(null, "$cell", "$cell", 1050200824)).cljs$core$IFn$_invoke$arity$1(c_102828);
+                    jayq.core.append.call(null, $r_102808, $c_102829);
+                    var G__102830 = cljs.core.next.call(null, seq__102759_102821__$1);
+                    var G__102831 = null;
+                    var G__102832 = 0;
+                    var G__102833 = 0;
+                    seq__102759_102809 = G__102830;
+                    chunk__102761_102810 = G__102831;
+                    count__102762_102811 = G__102832;
+                    i__102763_102812 = G__102833;
                     continue;
                   }
                 } else {
@@ -27283,14 +27324,14 @@ life.game.game = function() {
               }
               break;
             }
-            var G__98278 = cljs.core.next.call(null, seq__98191_98245__$1);
-            var G__98279 = null;
-            var G__98280 = 0;
-            var G__98281 = 0;
-            seq__98191_98209 = G__98278;
-            chunk__98193_98210 = G__98279;
-            count__98194_98211 = G__98280;
-            i__98195_98212 = G__98281;
+            var G__102834 = cljs.core.next.call(null, seq__102747_102801__$1);
+            var G__102835 = null;
+            var G__102836 = 0;
+            var G__102837 = 0;
+            seq__102747_102765 = G__102834;
+            chunk__102749_102766 = G__102835;
+            count__102750_102767 = G__102836;
+            i__102751_102768 = G__102837;
             continue;
           }
         } else {
@@ -27298,37 +27339,41 @@ life.game.game = function() {
       }
       break;
     }
-    yolk.bacon.on_value.call(null, rewind, function(world__$1, history, $t, rewind, step, clear, vec__98190, world) {
+    yolk.bacon.on_value.call(null, rewind, function(world, history, $t, rewind, step, clear, vec__102746, seed) {
       return function() {
-        return life.game.time_travel.call(null, history, world__$1, -1);
+        return life.game.time_travel.call(null, history, world, -1);
       };
-    }(world__$1, history, $t, rewind, step, clear, vec__98190, world));
-    yolk.bacon.on_value.call(null, step, function(world__$1, history, $t, rewind, step, clear, vec__98190, world) {
+    }(world, history, $t, rewind, step, clear, vec__102746, seed));
+    yolk.bacon.on_value.call(null, step, function(world, history, $t, rewind, step, clear, vec__102746, seed) {
       return function() {
-        return life.game.time_travel.call(null, history, world__$1, 1);
+        return life.game.time_travel.call(null, history, world, 1);
       };
-    }(world__$1, history, $t, rewind, step, clear, vec__98190, world));
-    yolk.bacon.on_value.call(null, clear, function(world__$1, history, $t, rewind, step, clear, vec__98190, world) {
+    }(world, history, $t, rewind, step, clear, vec__102746, seed));
+    yolk.bacon.on_value.call(null, clear, function(world, history, $t, rewind, step, clear, vec__102746, seed) {
       return function() {
-        return life.bj.modify.call(null, world__$1, cljs.core.constantly.call(null, cljs.core.PersistentHashSet.EMPTY));
+        return life.bj.modify.call(null, world, cljs.core.constantly.call(null, cljs.core.PersistentHashSet.EMPTY));
       };
-    }(world__$1, history, $t, rewind, step, clear, vec__98190, world));
-    return new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null, "$table", "$table", 2154669468), $t, new cljs.core.Keyword(null, "step", "step", 1017444926), step, new cljs.core.Keyword(null, "clear", "clear", 1108650431), clear, new cljs.core.Keyword(null, "world", "world", 1127223044), world__$1, new cljs.core.Keyword(null, "history", "history", 1940838406), history, new cljs.core.Keyword(null, "rewind", "rewind", 4374552621), rewind], null);
+    }(world, history, $t, rewind, step, clear, vec__102746, seed));
+    if (cljs.core.truth_(seed)) {
+      life.bj.modify.call(null, world, cljs.core.constantly.call(null, seed));
+    } else {
+    }
+    return new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null, "$table", "$table", 2154669468), $t, new cljs.core.Keyword(null, "step", "step", 1017444926), step, new cljs.core.Keyword(null, "clear", "clear", 1108650431), clear, new cljs.core.Keyword(null, "world", "world", 1127223044), world, new cljs.core.Keyword(null, "history", "history", 1940838406), history, new cljs.core.Keyword(null, "rewind", "rewind", 4374552621), rewind], null);
   };
   var game = function(h, w, var_args) {
-    var p__98170 = null;
+    var p__102726 = null;
     if (arguments.length > 2) {
-      p__98170 = cljs.core.array_seq(Array.prototype.slice.call(arguments, 2), 0);
+      p__102726 = cljs.core.array_seq(Array.prototype.slice.call(arguments, 2), 0);
     }
-    return game__delegate.call(this, h, w, p__98170);
+    return game__delegate.call(this, h, w, p__102726);
   };
   game.cljs$lang$maxFixedArity = 2;
-  game.cljs$lang$applyTo = function(arglist__98282) {
-    var h = cljs.core.first(arglist__98282);
-    arglist__98282 = cljs.core.next(arglist__98282);
-    var w = cljs.core.first(arglist__98282);
-    var p__98170 = cljs.core.rest(arglist__98282);
-    return game__delegate(h, w, p__98170);
+  game.cljs$lang$applyTo = function(arglist__102838) {
+    var h = cljs.core.first(arglist__102838);
+    arglist__102838 = cljs.core.next(arglist__102838);
+    var w = cljs.core.first(arglist__102838);
+    var p__102726 = cljs.core.rest(arglist__102838);
+    return game__delegate(h, w, p__102726);
   };
   game.cljs$core$IFn$_invoke$arity$variadic = game__delegate;
   return game;
@@ -27359,10 +27404,11 @@ life.core.draw_page = function draw_page($content) {
   jayq.core.append.call(null, $menu, life.templates.button.call(null, "rewind"));
   jayq.core.append.call(null, $menu, life.templates.button.call(null, "step"));
   jayq.core.append.call(null, $menu, life.templates.checkbox.call(null, "auto"));
-  return jayq.core.after.call(null, $menu, life.templates.hr.call(null));
+  jayq.core.after.call(null, $menu, life.templates.hr.call(null));
+  return jayq.core.append.call(null, $content, life.templates.div.call(null, "game"));
 };
 life.core.draw_game = function draw_game($content, game) {
-  return jayq.core.append.call(null, $content, (new cljs.core.Keyword(null, "$table", "$table", 2154669468)).cljs$core$IFn$_invoke$arity$1(game));
+  return jayq.core.html.call(null, jayq.core.$.call(null, ".game", $content), (new cljs.core.Keyword(null, "$table", "$table", 2154669468)).cljs$core$IFn$_invoke$arity$1(game));
 };
 life.core.main = function main() {
   var $content = jayq.core.$.call(null, "#content");
