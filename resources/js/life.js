@@ -27270,7 +27270,8 @@ life.core.main = function main() {
   life.core.ticker.call(null, tick);
   yolk.bacon.plug.call(null, (new cljs.core.Keyword(null, "step", "step", 1017444926)).cljs$core$IFn$_invoke$arity$1(game), yolk.bacon.filter.call(null, yolk.bacon.combine_with.call(null, tick, auto, cljs.core.list), cljs.core.second));
   yolk.bacon.plug.call(null, (new cljs.core.Keyword(null, "step", "step", 1017444926)).cljs$core$IFn$_invoke$arity$1(game), step);
+  yolk.bacon.plug.call(null, (new cljs.core.Keyword(null, "clear", "clear", 1108650431)).cljs$core$IFn$_invoke$arity$1(game), clear);
   life.bj.add_source.call(null, auto, yolk.bacon.map.call(null, clear, false));
-  return yolk.bacon.plug.call(null, (new cljs.core.Keyword(null, "clear", "clear", 1108650431)).cljs$core$IFn$_invoke$arity$1(game), clear);
+  return life.bj.add_source.call(null, auto, yolk.bacon.map.call(null, yolk.bacon.filter.call(null, yolk.bacon.changes.call(null, (new cljs.core.Keyword(null, "world", "world", 1127223044)).cljs$core$IFn$_invoke$arity$1(game)), cljs.core.empty_QMARK_), false));
 };
 goog.exportSymbol("life.core.main", life.core.main);
