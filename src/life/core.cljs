@@ -8,26 +8,37 @@
 (defn ticker [tick]
   (js/setTimeout (fn []
                    (b/push tick :tick)
-                   (ticker tick)) 1000))
+                   (ticker tick)) 2000))
+
+(defn draw-page [$content]
+  (let [$menu (t/controls)]
+    (j/append $content $menu)
+    (j/append $menu (t/button "clear"))
+    (j/append $menu (t/button "rewind"))
+    (j/append $menu (t/button "step"))
+    (j/append $menu (t/checkbox "auto"))
+    (j/after $menu (t/hr))))
+
+(defn draw-game [$content game]
+  (j/append $content (:$table game)))
 
 (defn ^:export main []
   (let [$content ($ "#content")
         game (g/game 30 50)
-        _ (j/html $content (:$elem game))
-        _ (j/append $content (t/button "step"))
-        _ (j/append $content (t/checkbox "auto"))
-        _ (j/append $content (t/button "clear"))
+        _ (draw-page $content)
+        _ (draw-game $content game)
+        clear (bj/clickE ($ ".clear" $content))
+        rewind (bj/clickE ($ ".rewind" $content))
         step (bj/clickE ($ ".step" $content))
         auto (bj/check-box-value ($ ".auto" $content))
-        clear (bj/clickE ($ ".clear" $content))
-        tick (b/bus)]
-    (ticker tick)
+        tick (b/bus)
+        timer (ticker tick)]
+    (b/plug (:clear game) clear)
+    (b/plug (:rewind game) rewind)
+    (b/plug (:step game) step)
     (b/plug (:step game)
             (-> (b/combine-with tick auto list)
                 (b/filter second)))
-    (b/plug (:step game) step)
-    (b/plug (:clear game) clear)
-    (bj/add-source auto (b/map clear false))
     (bj/add-source auto (-> (b/changes (:world game))
                             (b/filter empty?)
                             (b/map false)))))

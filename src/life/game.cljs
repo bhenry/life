@@ -33,7 +33,7 @@
                     b/skip-duplicates)]
     (b/on-value changes (render $c))
     (b/on-value click (toggle p w))
-    {:$elem $c}))
+    {:$cell $c}))
 
 (defn get-neighbors [p]
   ((apply juxt
@@ -62,9 +62,31 @@
 (defn iteration [w]
   (set (concat (sustain w) (reproduce w))))
 
-(defn game [h w]
-  (let [world (bj/model #{})
+(defn quantum-leap [h]
+  (fn [w]
+    (cond (empty? (first h)) w
+          :else (first h))))
+
+(defn write-history [w]
+  (fn [h]
+    (cond (= w (first h)) h
+          (empty? w) h
+          :else (take 100 (cons w h)))))
+
+(defn time-travel [history world dir]
+  (let [h (bj/get-value history)
+        w (bj/get-value world)]
+    (if (neg? dir)
+      (do (bj/modify history (constantly (rest h)))
+          (bj/modify world (quantum-leap h)))
+      (do (bj/modify world iteration)
+          (bj/modify history (write-history w))))))
+
+(defn game [h w & [world]]
+  (let [world (bj/model (or world #{}))
+        history (bj/model [])
         $t (t/table)
+        rewind (b/bus)
         step (b/bus)
         clear (b/bus)]
     (doseq [y (range h)
@@ -72,11 +94,14 @@
       (j/append $t $r)
       (doseq [x (range w)
               :let [c (cell world [x y])
-                    $c (:$elem c)]]
+                    $c (:$cell c)]]
         (j/append $r $c)))
-    (b/on-value step #(bj/modify world iteration))
+    (b/on-value rewind #(time-travel history world -1))
+    (b/on-value step #(time-travel history world 1))
     (b/on-value clear #(bj/modify world (constantly #{})))
-    {:$elem $t
+    {:$table $t
      :step step
      :clear clear
-     :world world}))
+     :world world
+     :history history
+     :rewind rewind}))

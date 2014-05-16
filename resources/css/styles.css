@@ -1,3 +1,4 @@
 td.alive { background-color: #333; }
 td { width: 8px; height: 8px; border: 1px solid black; }
 table { border-collapse: collapse; border: 1px solid black; table-layout: fixed; }
+button { float: left; }

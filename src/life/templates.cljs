@@ -1,27 +1,46 @@
 (ns life.templates
   (:require [jayq.core :as j :refer [$]]))
 
+(defn div []
+  ($ (str "<div>")))
+
+(defn hr []
+  ($ (str "<hr>")))
+
 (defn table []
-  ($ "<table></table>"))
+  ($ "<table>"))
 
 (defn table-row []
-  ($ "<tr></tr>"))
+  ($ "<tr>"))
 
 (defn table-cell []
-  ($ "<td></td>"))
+  ($ "<td>"))
 
 (defn button [n]
-  ($ (str "<button class=\"" n "\">" n "</button>")))
+  (let [$b ($ (str "<button>"))]
+    (j/add-class $b n)
+    (j/html $b n)
+    $b))
 
 (defn label [n]
-  ($ (str "<label for=\"" n "\">" n "</label>")))
+  (let [$l ($ (str "<label>"))]
+    (j/attr $l "for" n)
+    (j/html $l n)
+    $l))
 
 (defn check [n]
-  ($ (str "<input id=\"" n "\" type=\"checkbox\" name=\""
-          n "\" class=\"" n "\">")))
+  (let [$i ($ "<input>")]
+    (j/attr $i "type" "checkbox")
+    (j/attr $i "name" n)
+    (j/attr $i "id" n)
+    (j/add-class $i n)
+    $i))
 
 (defn checkbox [n]
-  (let [$elem ($ (str "<div></div>"))]
+  (let [$elem (div)]
     (j/append $elem (check n))
     (j/append $elem (label n))
     $elem))
+
+(defn controls []
+  ($ "<div class='controls'><div/>"))
