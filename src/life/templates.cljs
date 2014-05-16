@@ -10,8 +10,7 @@
   (let [$d ($ (str "<div>"))
         class (option opts :class :name)]
     (when class
-      (j/add-class $d class))
-    
+      (j/add-class $d class))    
     $d))
 
 (defn hr []
@@ -51,6 +50,3 @@
     (j/append $elem (check n))
     (j/append $elem (label n))
     $elem))
-
-(defn controls []
-  ($ "<div class='controls'><div/>"))

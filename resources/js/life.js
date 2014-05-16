@@ -26150,18 +26150,18 @@ life.templates.option = function() {
     return option__delegate.call(this, opts, ks);
   };
   option.cljs$lang$maxFixedArity = 1;
-  option.cljs$lang$applyTo = function(arglist__99594) {
-    var opts = cljs.core.first(arglist__99594);
-    var ks = cljs.core.rest(arglist__99594);
+  option.cljs$lang$applyTo = function(arglist__109419) {
+    var opts = cljs.core.first(arglist__109419);
+    var ks = cljs.core.rest(arglist__109419);
     return option__delegate(opts, ks);
   };
   option.cljs$core$IFn$_invoke$arity$variadic = option__delegate;
   return option;
 }();
 life.templates.div = function() {
-  var div__delegate = function(p__99595) {
-    var vec__99597 = p__99595;
-    var opts = cljs.core.nth.call(null, vec__99597, 0, null);
+  var div__delegate = function(p__109420) {
+    var vec__109422 = p__109420;
+    var opts = cljs.core.nth.call(null, vec__109422, 0, null);
     var $d = jayq.core.$.call(null, [cljs.core.str("\x3cdiv\x3e")].join(""));
     var class$ = life.templates.option.call(null, opts, new cljs.core.Keyword(null, "class", "class", 1108647146), new cljs.core.Keyword(null, "name", "name", 1017277949));
     if (cljs.core.truth_(class$)) {
@@ -26171,16 +26171,16 @@ life.templates.div = function() {
     return $d;
   };
   var div = function(var_args) {
-    var p__99595 = null;
+    var p__109420 = null;
     if (arguments.length > 0) {
-      p__99595 = cljs.core.array_seq(Array.prototype.slice.call(arguments, 0), 0);
+      p__109420 = cljs.core.array_seq(Array.prototype.slice.call(arguments, 0), 0);
     }
-    return div__delegate.call(this, p__99595);
+    return div__delegate.call(this, p__109420);
   };
   div.cljs$lang$maxFixedArity = 0;
-  div.cljs$lang$applyTo = function(arglist__99598) {
-    var p__99595 = cljs.core.seq(arglist__99598);
-    return div__delegate(p__99595);
+  div.cljs$lang$applyTo = function(arglist__109423) {
+    var p__109420 = cljs.core.seq(arglist__109423);
+    return div__delegate(p__109420);
   };
   div.cljs$core$IFn$_invoke$arity$variadic = div__delegate;
   return div;
@@ -26222,9 +26222,6 @@ life.templates.checkbox = function checkbox(n) {
   jayq.core.append.call(null, $elem, life.templates.check.call(null, n));
   jayq.core.append.call(null, $elem, life.templates.label.call(null, n));
   return $elem;
-};
-life.templates.controls = function controls() {
-  return jayq.core.$.call(null, "\x3cdiv class\x3d'controls'\x3e\x3cdiv/\x3e");
 };
 goog.provide("yolk.bacon");
 goog.require("cljs.core");
@@ -27391,6 +27388,16 @@ goog.require("yolk.bacon");
 goog.require("life.game");
 goog.require("jayq.core");
 goog.require("jayq.core");
+life.core.seed = cljs.core.PersistentHashSet.fromArray([new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [14, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [15, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [14, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [12, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, 
+[12, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [11, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [9, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [40, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [8, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [41, 14], 
+null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [8, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [4, 11], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [38, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [6, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [40, 15], null), new cljs.core.PersistentVector(null, 
+2, 5, cljs.core.PersistentVector.EMPTY_NODE, [4, 12], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [37, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [5, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [6, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [4, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, 
+[37, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [5, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [4, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [35, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [34, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [34, 14], 
+null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [32, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [31, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [27, 11], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [29, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [27, 12], null), 
+new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [28, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [29, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [27, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [27, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [23, 13], null), new cljs.core.PersistentVector(null, 
+2, 5, cljs.core.PersistentVector.EMPTY_NODE, [24, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [23, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [21, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [20, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [21, 14], null), new cljs.core.PersistentVector(null, 2, 5, 
+cljs.core.PersistentVector.EMPTY_NODE, [18, 12], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [20, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [18, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [17, 13], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [18, 14], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, 
+[17, 14], null)], true);
 life.core.ticker = function ticker(tick) {
   return setTimeout(function() {
     yolk.bacon.push.call(null, tick, new cljs.core.Keyword(null, "tick", "tick", 1017464079));
@@ -27398,33 +27405,44 @@ life.core.ticker = function ticker(tick) {
   }, 2E3);
 };
 life.core.draw_page = function draw_page($content) {
-  var $menu = life.templates.controls.call(null);
+  var $menu = life.templates.div.call(null, "controls");
+  var $util = life.templates.div.call(null, "utilities");
   jayq.core.append.call(null, $content, $menu);
   jayq.core.append.call(null, $menu, life.templates.button.call(null, "clear"));
   jayq.core.append.call(null, $menu, life.templates.button.call(null, "rewind"));
   jayq.core.append.call(null, $menu, life.templates.button.call(null, "step"));
   jayq.core.append.call(null, $menu, life.templates.checkbox.call(null, "auto"));
-  jayq.core.after.call(null, $menu, life.templates.hr.call(null));
-  return jayq.core.append.call(null, $content, life.templates.div.call(null, "game"));
+  jayq.core.append.call(null, $content, life.templates.hr.call(null));
+  jayq.core.append.call(null, $content, life.templates.div.call(null, "game"));
+  jayq.core.append.call(null, $content, life.templates.hr.call(null));
+  jayq.core.append.call(null, $content, $util);
+  return jayq.core.append.call(null, $util, life.templates.button.call(null, "print"));
 };
 life.core.draw_game = function draw_game($content, game) {
   return jayq.core.html.call(null, jayq.core.$.call(null, ".game", $content), (new cljs.core.Keyword(null, "$table", "$table", 2154669468)).cljs$core$IFn$_invoke$arity$1(game));
 };
 life.core.main = function main() {
   var $content = jayq.core.$.call(null, "#content");
-  var game = life.game.game.call(null, 30, 50);
+  var game = life.game.game.call(null, 30, 50, life.core.seed);
   var _ = life.core.draw_page.call(null, $content);
   var ___$1 = life.core.draw_game.call(null, $content, game);
   var clear = life.bj.clickE.call(null, jayq.core.$.call(null, ".clear", $content));
   var rewind = life.bj.clickE.call(null, jayq.core.$.call(null, ".rewind", $content));
   var step = life.bj.clickE.call(null, jayq.core.$.call(null, ".step", $content));
   var auto = life.bj.check_box_value.call(null, jayq.core.$.call(null, ".auto", $content));
+  var print = life.bj.clickE.call(null, jayq.core.$.call(null, ".print", $content));
   var tick = yolk.bacon.bus.call(null);
   var timer = life.core.ticker.call(null, tick);
   yolk.bacon.plug.call(null, (new cljs.core.Keyword(null, "clear", "clear", 1108650431)).cljs$core$IFn$_invoke$arity$1(game), clear);
   yolk.bacon.plug.call(null, (new cljs.core.Keyword(null, "rewind", "rewind", 4374552621)).cljs$core$IFn$_invoke$arity$1(game), rewind);
   yolk.bacon.plug.call(null, (new cljs.core.Keyword(null, "step", "step", 1017444926)).cljs$core$IFn$_invoke$arity$1(game), step);
   yolk.bacon.plug.call(null, (new cljs.core.Keyword(null, "step", "step", 1017444926)).cljs$core$IFn$_invoke$arity$1(game), yolk.bacon.filter.call(null, yolk.bacon.combine_with.call(null, tick, auto, cljs.core.list), cljs.core.second));
-  return life.bj.add_source.call(null, auto, yolk.bacon.map.call(null, yolk.bacon.filter.call(null, yolk.bacon.changes.call(null, (new cljs.core.Keyword(null, "world", "world", 1127223044)).cljs$core$IFn$_invoke$arity$1(game)), cljs.core.empty_QMARK_), false));
+  life.bj.add_source.call(null, auto, yolk.bacon.map.call(null, yolk.bacon.filter.call(null, yolk.bacon.changes.call(null, (new cljs.core.Keyword(null, "world", "world", 1127223044)).cljs$core$IFn$_invoke$arity$1(game)), cljs.core.empty_QMARK_), false));
+  life.bj.add_source.call(null, auto, yolk.bacon.map.call(null, rewind, false));
+  return yolk.bacon.on_value.call(null, print, function($content, game, _, ___$1, clear, rewind, step, auto, print, tick, timer) {
+    return function() {
+      return console.log(cljs.core.pr_str.call(null, life.bj.get_value.call(null, (new cljs.core.Keyword(null, "world", "world", 1127223044)).cljs$core$IFn$_invoke$arity$1(game))));
+    };
+  }($content, game, _, ___$1, clear, rewind, step, auto, print, tick, timer));
 };
 goog.exportSymbol("life.core.main", life.core.main);
