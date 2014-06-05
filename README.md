@@ -1,10 +1,10 @@
 # life
 
-A Clojure library designed to ... well, that part is up to you.
+Conway's Game of Life in your web browser.
 
 ## Usage
 
-FIXME
+http://bhenry.github.io/life
 
 ## License
 
