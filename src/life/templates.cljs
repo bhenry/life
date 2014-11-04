@@ -7,14 +7,14 @@
     (first (remove nil? ((apply juxt ks) opts)))))
 
 (defn div [& [opts]]
-  (let [$d ($ (str "<div>"))
+  (let [$d ($ "<div>")
         class (option opts :class :name)]
     (when class
       (j/add-class $d class))    
     $d))
 
 (defn hr []
-  ($ (str "<hr>")))
+  ($ "<hr>"))
 
 (defn table []
   ($ "<table>"))
@@ -26,13 +26,13 @@
   ($ "<td>"))
 
 (defn button [n]
-  (let [$b ($ (str "<button>"))]
+  (let [$b ($ "<button>")]
     (j/add-class $b n)
     (j/html $b n)
     $b))
 
 (defn label [n]
-  (let [$l ($ (str "<label>"))]
+  (let [$l ($ "<label>")]
     (j/attr $l "for" n)
     (j/html $l n)
     $l))
